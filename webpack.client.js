@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: ['@babel/polyfill', './src/client.js'],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist'),
   },
   module: {
@@ -14,6 +14,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-react', '@babel/preset-env'],
+            plugins: ['@babel/plugin-syntax-dynamic-import'],
           },
         },
       },
