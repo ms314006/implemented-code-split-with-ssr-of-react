@@ -1,1 +1,1 @@
-# implement-ssr-of-react
+# implemented-code-split-with-ssr-of-react
