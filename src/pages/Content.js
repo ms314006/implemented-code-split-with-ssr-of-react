@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRequestQuery } from '../actions';
 
-const loadData = dispatch => (
-  fetchRequestQuery(dispatch)
+const loadData = async dispatch => (
+  Promise.all([
+    fetchRequestQuery(dispatch),
+  ])
 );
 
 const Content = () => {

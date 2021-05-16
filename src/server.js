@@ -14,9 +14,14 @@ app.get('*', (req, res) => {
   const store = createStore();
   const { dispatch } = store;
   const routes = matchRoutes(Routes, req.path);
-  const promises = routes.map(
-    ({ route }) => (route.loadData ? route.loadData(dispatch) : null),
-  );
+  const promises = routes
+    .filter(({ route }) => route.loadData)
+    .map(
+      async ({ route }) => {
+        const { default: { loadData } } = await route.loadData;
+        return loadData(dispatch);
+      },
+    );
   Promise.all(promises).then(() => {
     const content = renderer(req, store);
 
